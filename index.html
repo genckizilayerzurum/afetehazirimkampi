@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Katılım Belgesi Oluştur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            background-color: #f9f9f9;
+        }
+        #certificateCanvas {
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Katılım Belgesi Oluştur</h1>
+    <p>Ad Soyad giriniz:</p>
+    <input type="text" id="fullName" placeholder="Ad Soyad">
+    <button onclick="generateCertificate()">Belge Oluştur</button>
+    <br><br>
+    <canvas id="certificateCanvas" width="1087" height="768"></canvas>
+    <br>
+    <a id="downloadLink" style="display:none" download="katilim_belgesi.jpg">Belgeyi İndir</a>
+
+    <script src="script.js"></script>
+</body>
+</html>
