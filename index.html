@@ -2,20 +2,90 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Katılım Belgesi Oluştur</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Katılım Belgesi Oluştur</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f7f7f7;
+    }
+    #belge {
+      position: relative;
+      width: 1080px;
+      height: 768px;
+      margin: 20px auto;
+      background-image: url('katilim_belgesi.png');
+      background-size: cover;
+      background-position: center;
+    }
+    #isim {
+      position: absolute;
+      top: 330px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 42px;
+      font-weight: bold;
+      color: #FF3333;
+      font-family: 'Georgia', serif;
+    }
+    #form {
+      margin-top: 30px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      font-size: 18px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    a#indir {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Katılım Belgesi Oluştur</h1>
-        <input type="text" id="nameInput" placeholder="Ad Soyad">
-        <button onclick="generateCertificate()">Belgeyi Oluştur</button>
-        <br><br>
-        <canvas id="certificateCanvas"></canvas>
-        <br>
-        <a id="downloadLink" download="katilim_belgesi.png" style="display: none;">Belgeyi İndir</a>
+  <h1>Katılım Belgesi Oluştur</h1>
+  <div id="form">
+    <input type="text" id="adsoyad" placeholder="Ad Soyad">
+    <button onclick="olustur()">Belgeyi Oluştur</button>
+  </div>
+  <div id="belge-container">
+    <div id="belge">
+      <div id="isim"></div>
     </div>
-    <script src="script.js"></script>
+  </div>
+  <a id="indir" download="katilim_belgesi.png">Belgeyi İndir</a>
+
+  <script>
+    function olustur() {
+      var isim = document.getElementById("adsoyad").value.trim();
+      if (!isim) {
+        alert("Lütfen ad soyad giriniz.");
+        return;
+      }
+      document.getElementById("isim").innerText = isim;
+      setTimeout(function() {
+        html2canvas(document.getElementById("belge")).then(canvas => {
+          var indirButonu = document.getElementById("indir");
+          indirButonu.href = canvas.toDataURL("image/png");
+          indirButonu.style.display = 'inline-block';
+        });
+      }, 500);
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
